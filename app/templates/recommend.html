@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    {% for book in results %}
+    <div>
+    <!--构造书籍内容-->
+    {{ book.title }}
+    </div>
+    {% endfor %}
+{% endblock %}

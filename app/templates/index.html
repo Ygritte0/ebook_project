@@ -1,35 +1,28 @@
+
+
+{#
+这个是你的基模板，你当前页面是在这个基模板基础上渲染的。
+也就是说，你只能填充基模板里面的内容，只能填充基模板里面的block而不能额外加东西。
+
+使用基模板，意思就是说用当前页面 block 里面的内容填充基模板里面对应的 block
+#}
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
+{% block title %}Ebook{% endblock %}  {# 像这种，写在block里面的才是有效的 #}
 
 
-{% block title %}Ebook{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">首页</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/">推荐</a></li>
-            </ul>
-        </div>
-    </div>
+{{ super() }}
+{% endblock %}
+
+{% block page_content %}
+    {{ wtf.quick_form(form, method="GET") }}
+    {% include '_books.html'%}
 </div>
 {% endblock %}
 
-<div>
-    {% block page_content %}
-
-    {{wtf.quick_form(form)}}
-
-    {% endblock %}
-</div>

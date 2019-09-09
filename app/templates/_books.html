@@ -1,0 +1,42 @@
+<!--<ul class="books">-->
+    <!--<li class="book">-->
+        <div class="table-bordered">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <td>Book Title</td>
+                        <td>Author</td>
+                        <td>Pub_date</td>
+                        <td>Size</td>
+                        <td>Info</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                         {% for book in books %}
+                         <tr>
+                            <td>{{ book.title}}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.pub_date }}</td>
+                            <td>{{ book.size }}</td>
+                            <td>{{ book.introductions }}</td>
+                         </tr>
+                         {% endfor %}
+
+                    </tbody>
+                </table>
+        </div>
+
+    <!--</li>-->
+<!--</ul>-->
+
+
+<!--<table border="1">-->
+  <!--<tr>-->
+    <!--<th>Month</th>-->
+    <!--<th>Savings</th>-->
+  <!--</tr>-->
+  <!--<tr>-->
+    <!--<td>January</td>-->
+    <!--<td>$100</td>-->
+  <!--</tr>-->
+<!--</table>-->

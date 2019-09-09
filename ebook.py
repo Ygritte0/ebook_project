@@ -3,7 +3,7 @@ import os
 from flask_migrate import Migrate
 
 config_name = os.getenv('FLASK_CONFIG') or 'default'
-print('config_name', config_name)
+# print('config_name', config_name)
 
 app = create_app(config_name)
 # app.config.from_object(config[config_name])
@@ -19,3 +19,6 @@ migrate = Migrate(app, db)
 @app.shell_context_processor
 def make_shell_content():
     return dict(db=db, Book=Book)
+
+if __name__ == '__main__':
+    app.run(debug=True)

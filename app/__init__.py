@@ -10,10 +10,10 @@ from config import config
 bootstrap = Bootstrap()
 # mail = Mail()
 # moment = Moment()
+
+# 这里首先实例化了orm实例，但是没有传入配置信息。在这里实例化只是为了先定义出来，供别的代码引用
 db = SQLAlchemy()
 pagedown = PageDown()
-
-
 
 
 def create_app(config_name):
@@ -22,7 +22,7 @@ def create_app(config_name):
     # 这一行是应用配置的，from_object是让app从传入的对象中读取配置。
     # 如果你自定义了配置类，就把你的类传进来，也就是你的 config['default']。
     # app是Flask的实例，它有一个default_config属性，代表了默认的配置
-    app.config.from_object(config['default'])
+    app.config.from_object(config[config_name])
 
     # 这个地方发起了一个KeyError异常，KeyError一般在直接获取dict值时报错
     # 举例，a是一个字典，当直接过去里面b的值的时候就会报错：
@@ -30,19 +30,24 @@ def create_app(config_name):
     # print(a['b'])
     # 所以你这里是因为 config 变量不存在值为 config_name的键
     # 如何调试呢？首先打印config，看config里都有什么。然后打印config_name，看在不在config里
-    print('config is: ', config)
-    print('config_name is： ', config_name)
+    # print('config is: ', config)
+    # print('config_name is： ', config_name)
     # config 是个字典类型，如果config中存在config_name这个键，那么config_name in config会是True
-    print('config_name in config ', config_name in config)
+    # print('config_name in config ', config_name in config)
 
     # 这一行不是应用配置，而是执行配置内的init_app函数，进行其他一些处理。
     # 你 config 中自定义的init_app函数，代码块是pass，什么都没做。所以这一行可以注释掉
     config[config_name].init_app(app)
-    print(app.config)
+    # print(app.c:wq
+    # onfig)
 
     bootstrap.init_app(app)
     # mail.init_app(app)
     # moment.init_app(app)
+
+    # 这里调用init_app方法，传入app实例。
+    # 首先这里的db是上面定义好的db，所以init_app方法所有的操作都是在修改db这个对象
+    # 经过这一行代码，虽然db还是内存中的db，但是它里面的一些属性已经变化了。因为init_app进行了处理
     db.init_app(app)
     # pagedown.init_app(app)
     #

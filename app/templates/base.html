@@ -4,9 +4,9 @@
 
 {% block head %}
 {{ super() }}
-<link rel="stylesheet"
-          href="/app/static/lib/bootstrap-3.3.7-dist/css/bootstrap.css"
-          crossorigin="anonymous">
+{#<link rel="stylesheet"#}
+{#          href="D:\workspace\ebook_project\static\lib\bootstrap-3.3.7-dist\css\bootstrap.css"#}
+{#          crossorigin="anonymous">#}
 {% endblock %}
 
 {% block navbar %}
@@ -19,11 +19,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Flasky</a>
+            <a class="navbar-brand" href="/">首页</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
+                <li><a href="{{url_for('main.recommend')}}">推荐</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('main.upload')}}">上传书籍</a></li>
             </ul>
         </div>
     </div>
@@ -32,7 +35,13 @@
 
 {% block content %}
 <div class="container">
-    {% block page_content %}{% endblock %}
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% block page_content %}{% endblock %}  {# 这个块的意思是说，你有什么页面里的内容就放在这里 #}
 </div>
 {% endblock %}
 
